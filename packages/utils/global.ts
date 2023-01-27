@@ -1,6 +1,6 @@
 import { UAParser } from 'ua-parser-js'
 import { generateUUID } from './helper'
-import type { Breadcrumb } from '@dd-monitor/core'
+import type { Breadcrumb, Transport } from '@dd-monitor/core'
 import type { EventTypes } from '@dd-monitor/types'
 import type { Logger } from './logger'
 
@@ -21,6 +21,7 @@ export interface MonitorSupport {
   events: any[]
   recordScreenId: string
   breadcrumb: Breadcrumb
+  transport: Transport
 }
 
 interface MONITORGlobal {

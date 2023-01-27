@@ -9,11 +9,10 @@ import type {
   AuthInfo,
   BaseOptionsFieldsIntegrationType,
   BreadcrumbData,
-  RecordData,
   TransportData,
 } from '@dd-monitor/types'
 
-export abstract class BaseTransport<
+export abstract class Transport<
   O extends BaseOptionsFieldsIntegrationType = BaseOptionsFieldsIntegrationType
 > {
   appKey = ''
