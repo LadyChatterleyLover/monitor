@@ -1,3 +1,5 @@
+import pkg from '../../package.json'
+
 export const enum ToStringTypes {
   String = 'String',
   Number = 'Number',
@@ -12,3 +14,13 @@ export const enum ToStringTypes {
   Window = 'Window',
   Function = 'Function',
 }
+
+export interface AuthInfo {
+  trackerId: string
+  sdkVersion: string
+  sdkName: string
+  appKey: string
+}
+
+export const SDK_VERSION = pkg.version
+export const SDK_NAME = 'dd-monitor'

@@ -1,5 +1,6 @@
 // 上报数据
-import type { UAParser } from 'ua-parser-js'
+import type { BreadcrumbData } from './breadcrumbs'
+import type { IResult } from 'ua-parser-js'
 import type { EventTypes, StatusCode } from './event'
 export interface TransportData {
   // app唯一key
@@ -11,7 +12,7 @@ export interface TransportData {
   // 当前日期
   date: string
   // 用户设备信息
-  deviceInfo: UAParser.IResult
+  deviceInfo: IResult
   // 报错文件名
   fileName?: string
   // 报错信息
@@ -32,4 +33,6 @@ export interface TransportData {
   type: EventTypes
   // uuid
   uuid: string
+  // 用户行为
+  breadcrumb?: BreadcrumbData[]
 }

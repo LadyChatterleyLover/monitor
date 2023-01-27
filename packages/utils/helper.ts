@@ -128,6 +128,21 @@ export function toStringValidateOption(
   return false
 }
 
+export function typeofAny(target) {
+  return Object.prototype.toString.call(target).slice(8, -1).toLowerCase()
+}
+
+// 验证选项的类型
+export function validateOption(target, targetName, expectType) {
+  if (!target) return false
+  if (typeofAny(target) === expectType) return true
+  console.error(
+    `web-see: ${targetName}期望传入${expectType}类型，目前是${typeofAny(
+      target
+    )}类型`
+  )
+}
+
 export function validateOptionsAndSet(
   this: any,
   targetArr: [any, string, ToStringTypes][]
@@ -137,4 +152,18 @@ export function validateOptionsAndSet(
       toStringValidateOption(target, targetName, expectType) &&
       (this[targetName] = target)
   )
+}
+
+export function nativeTryCatch(
+  fn: () => void,
+  errorFn?: (err: any) => void
+): void {
+  try {
+    fn()
+  } catch (err) {
+    console.error('err', err)
+    if (errorFn) {
+      errorFn(err)
+    }
+  }
 }

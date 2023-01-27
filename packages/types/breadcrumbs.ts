@@ -17,4 +17,5 @@ export interface BreadcrumbData {
   status: StatusCode
   time: number
   data: string | Partial<RecordData>
+  username: string
 }

@@ -1,6 +1,7 @@
 export * from './event'
 export * from './options'
 export * from './breadcrumbs'
+export * from './plugin'
 export * from './transport'
 export * from './client'
 export * from './const'
