@@ -1,6 +1,5 @@
 // 上报数据
 import type { BreadcrumbData } from './breadcrumbs'
-import type { IResult } from 'ua-parser-js'
 import type { EventTypes, StatusCode } from './event'
 export interface TransportData {
   // app唯一key
@@ -12,7 +11,15 @@ export interface TransportData {
   // 当前日期
   date: string
   // 用户设备信息
-  deviceInfo: IResult
+  deviceInfo: {
+    browser_version: string
+    browser: string
+    os_version: string
+    os: string
+    ua: string
+    device: string
+    device_type: string
+  }
   // 报错文件名
   fileName?: string
   // 报错信息

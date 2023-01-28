@@ -17,6 +17,7 @@ lib
 
 /cypress/videos/
 /cypress/screenshots/
+/examples/*
 
 # Editor directories and files
 .vscode/*

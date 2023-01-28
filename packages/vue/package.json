@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "main": "dist/index.min.js",
-  "module": "dist/index.esm.js",
+  "main": "index.ts",
+  "module": "index.ts",
   "types": "dist/index.d.ts"
 }

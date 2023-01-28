@@ -1,4 +1,4 @@
-import { getFunctionName, logger, nativeTryCatch } from '@dd-monitor/utils'
+import { getFunctionName, nativeTryCatch } from '@dd-monitor/utils'
 
 type MonitorCallback = (data: any) => void
 
@@ -21,7 +21,7 @@ export class Subscribe<T> {
           fn(data)
         },
         (e: Error) => {
-          logger.error(
+          console.error(
             `Subscribe.notify：监听事件的回调函数发生错误\neventName:${eventName}\nName: ${getFunctionName(
               fn
             )}\nError: ${e}`

@@ -12,8 +12,8 @@
   "scripts": {
     "build": "tsup",
     "postinstall": "husky install",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --max-warnings 0 && pretty-quick --check",
-    "lint:fix": "eslint --fix . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json && pretty-quick"
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0 && pretty-quick --check",
+    "lint:fix": "eslint --fix . --ext .vue,.js,.ts,.jsx,.tsx && pretty-quick"
   },
   "dependencies": {
     "@dd-monitor/browser": "workspace:*",
@@ -23,6 +23,10 @@
     "@dd-monitor/utils": "workspace:*",
     "@dd-monitor/vue": "workspace:*",
     "dayjs": "^1.11.7",
+    "error-stack-parser": "^2.1.4",
+    "js-base64": "^3.7.4",
+    "pako": "^2.1.0",
+    "rrweb-player": "1.0.0-alpha.4",
     "ua-parser-js": "^1.0.33"
   },
   "devDependencies": {
@@ -46,6 +50,6 @@
     }
   },
   "lint-staged": {
-    "*.{vue,js,ts,jsx,tsx,md,json}": "eslint --fix"
+    "*.{vue,js,ts,jsx,tsx}": "eslint --fix"
   }
 }

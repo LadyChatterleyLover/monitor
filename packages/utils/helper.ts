@@ -1,5 +1,4 @@
 import { isBrowserEnv } from './global'
-import { logger } from './logger'
 import type { ToStringTypes } from '@dd-monitor/types'
 
 // 用到所有事件的名称
@@ -18,10 +17,10 @@ export function getUrlWithEnv(): string {
   return ''
 }
 
-export function on(
-  target: HTMLElement | Element,
+export function onEvent(
+  target: HTMLElement | Element | Window | Document,
   eventName: TotalEventName,
-  handler: () => void,
+  handler: (e?: any) => void,
   opitons: boolean | unknown = false
 ): void {
   target.addEventListener(eventName, handler, opitons)
@@ -120,7 +119,7 @@ export function toStringValidateOption(
 ): boolean {
   if (toStringAny(target, expectType)) return true
   typeof target !== 'undefined' &&
-    logger.error(
+    console.error(
       `${targetName}期望传入:${expectType}类型，当前是:${nativeToString.call(
         target
       )}类型`
@@ -166,4 +165,72 @@ export function nativeTryCatch(
       errorFn(err)
     }
   }
+}
+
+export function isError(wat) {
+  switch (nativeToString.call(wat)) {
+    case '[object Error]':
+      return true
+    case '[object Exception]':
+      return true
+    case '[object DOMException]':
+      return true
+    default:
+      return false
+  }
+}
+
+export function isType(type) {
+  return function (value) {
+    return nativeToString.call(value) === `[object ${type}]`
+  }
+}
+
+export const variableTypeDetection = {
+  isNumber: isType('Number'),
+  isString: isType('String'),
+  isBoolean: isType('Boolean'),
+  isNull: isType('Null'),
+  isUndefined: isType('Undefined'),
+  isSymbol: isType('Symbol'),
+  isFunction: isType('Function'),
+  isObject: isType('Object'),
+  isArray: isType('Array'),
+  isProcess: isType('process'),
+  isWindow: isType('Window'),
+}
+
+export function unknownToString(target) {
+  if (variableTypeDetection.isString(target)) {
+    return target
+  }
+  if (variableTypeDetection.isUndefined(target)) {
+    return 'undefined'
+  }
+  return JSON.stringify(target)
+}
+
+export function interceptStr(str, interceptLength) {
+  if (variableTypeDetection.isString(str)) {
+    return (
+      str.slice(0, interceptLength) +
+      (str.length > interceptLength ? `:截取前${interceptLength}个字符` : '')
+    )
+  }
+  return ''
+}
+
+export function htmlElementAsString(target) {
+  const tagName = target.tagName.toLowerCase()
+  if (tagName === 'body') {
+    return null
+  }
+  let classNames = target.classList.value
+
+  classNames = classNames !== '' ? ` class='${classNames}'` : ''
+  const id = target.id ? ` id="${target.id}"` : ''
+  const innerText = target.innerText
+  return `<${tagName}${id}${
+    classNames !== '' ? classNames : ''
+  }>${innerText}</${tagName}>`
 }

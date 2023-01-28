@@ -24,3 +24,7 @@ export interface AuthInfo {
 
 export const SDK_VERSION = pkg.version
 export const SDK_NAME = 'dd-monitor'
+
+const local = localStorage.getItem('userInfo')
+export const username = local ? JSON.parse(local).real_name : ''
+export const roleName = local ? JSON.parse(local).role_name : ''

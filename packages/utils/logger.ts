@@ -1,11 +1,11 @@
-import { _global, _support } from './global'
+import { _global } from './global'
 const PREFIX = 'Monitor Logger'
 
 export class Logger {
   private enabled = false
   private _console: Console = {} as Console
   constructor() {
-    _global.console = console || _global.console
+    _global!.console = console || _global.console
     if (console || _global.console) {
       const logType = ['log', 'debug', 'info', 'warn', 'error', 'assert']
       logType.forEach((level) => {
@@ -54,5 +54,6 @@ export class Logger {
   }
 }
 
-const logger = _support.logger || (_support.logger = new Logger())
+// const logger = _support?.logger || (_support!.logger = new Logger())
+const logger = new Logger()
 export { logger }

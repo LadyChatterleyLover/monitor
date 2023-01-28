@@ -1,7 +1,7 @@
 import {
   Queue,
+  generateUUID,
   isInclude,
-  logger,
   validateOptionsAndSet,
 } from '@dd-monitor/utils'
 import { SDK_NAME, SDK_VERSION, ToStringTypes } from '@dd-monitor/types'
@@ -28,6 +28,7 @@ export abstract class Transport<
   backTrackerId: unknown = null
   configReportUrl: unknown = null
   maxDuplicateCount = 3
+  uuid = generateUUID()
   constructor() {
     this.queue = new Queue()
   }
@@ -49,7 +50,7 @@ export abstract class Transport<
       if (typeof trackerId === 'string' || typeof trackerId === 'number') {
         return trackerId
       } else {
-        logger.error(
+        console.error(
           `trackerId:${trackerId} 期望 string 或 number 类型，但是传入 ${typeof trackerId}`
         )
       }
@@ -93,7 +94,7 @@ export abstract class Transport<
     }
     let dsn = this.dsn
     if (!dsn) {
-      logger.error('dsn不能为空')
+      console.error('dsn不能为空')
       return
     }
     if (typeof this.configReportUrl === 'function') {

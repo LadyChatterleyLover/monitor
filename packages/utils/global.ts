@@ -1,8 +1,8 @@
 import { UAParser } from 'ua-parser-js'
 import { generateUUID } from './helper'
+import type { Logger } from './logger'
 import type { Breadcrumb, Transport } from '@dd-monitor/core'
 import type { EventTypes } from '@dd-monitor/types'
-import type { Logger } from './logger'
 
 export interface MonitorSupport {
   logger: Logger
