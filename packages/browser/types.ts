@@ -1,8 +1,12 @@
-import type { BaseOptionsFieldsIntegrationType } from './../types/options'
+import type {
+  BaseOptionsFieldsIntegrationType,
+  BaseOptionsHooksType,
+} from '@dd-monitor/types'
 export interface BrowserOptionsFieldsTypes
   extends BrowserOptions,
     BrowserOptionsHooksType,
-    BaseOptionsFieldsIntegrationType {
+    BaseOptionsFieldsIntegrationType,
+    BaseOptionsHooksType {
   // 是否使用image方式上报
   useImgUpload?: boolean
 }

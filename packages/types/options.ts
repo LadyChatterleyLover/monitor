@@ -7,15 +7,12 @@ import type { Breadcrumb } from '@dd-monitor/core/breadcrumb'
 type CANCEL = null | undefined | boolean
 
 type TSetRequestHeader = (key: string, value: string) => object
-export interface IBeforeAppAjaxSendConfig {
-  setRequestHeader: TSetRequestHeader
-}
 
 export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
 
 interface IRequestHeaderConfig {
-  url: HttpMethod
-  method: string
+  url: string
+  method: HttpMethod
 }
 
 export interface BaseOptionsType<O extends BaseOptionsFieldsIntegrationType>
@@ -93,7 +90,7 @@ export interface BaseOptionsHooksType {
    */
   beforeAppAjaxSend?(
     config: IRequestHeaderConfig,
-    setRequestHeader: IBeforeAppAjaxSendConfig
+    setRequestHeader: Headers
   ): void
   /**
    *钩子函数:在beforeDataReport后面调用，在整合上报数据和本身SDK信息数据前调用，当前函数执行完后立即将数据错误信息上报至服务端

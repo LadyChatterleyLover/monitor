@@ -14,12 +14,14 @@ export class BrowserOptions extends BaseOptions<BrowserOptionsFieldsTypes> {
   recordScreen?: boolean
   whiteScreen?: boolean
   whiteBoxElements?: string[]
+  overTime?: number
   constructor(options: BrowserOptionsFieldsTypes) {
     super()
     super.bindOptions(options)
     this.bindOptions(options)
     // 白屏检测的父容器列表
     this.whiteBoxElements = ['html', 'body', '#app', '#root']
+    this.overTime = 5
   }
   bindOptions(options: BrowserOptionsFieldsTypes) {
     const {

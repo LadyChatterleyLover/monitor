@@ -55,7 +55,7 @@ export enum HttpType {
 
 // 状态码
 export enum HttpCode {
-  Bad_request = 400,
+  BadRequest = 400,
   Unauthorized = 401,
 }
 

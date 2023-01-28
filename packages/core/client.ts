@@ -7,7 +7,6 @@ import type { Transport } from './transport'
 import type {
   BaseClientType,
   BaseOptionsFieldsIntegrationType,
-  BaseOptionsFieldsType,
   BasePluginType,
   EventTypes,
   LogType,
@@ -20,7 +19,7 @@ export abstract class BaseClient<
 {
   sdkName = SDK_NAME
   sdkVersion = SDK_VERSION
-  options: BaseOptionsFieldsType
+  options: BaseOptionsFieldsIntegrationType
   abstract breadcrumb: Breadcrumb
   abstract transport: Transport
   constructor(options: O) {
