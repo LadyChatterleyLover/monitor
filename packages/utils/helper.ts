@@ -18,7 +18,7 @@ export function getUrlWithEnv(): string {
 }
 
 export function onEvent(
-  target: HTMLElement | Element | Window | Document,
+  target: HTMLElement | Element | Window | Document | XMLHttpRequest,
   eventName: TotalEventName,
   handler: (e?: any) => void,
   opitons: boolean | unknown = false
