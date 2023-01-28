@@ -5,12 +5,12 @@ import {
   variableTypeDetection,
 } from '@dd-monitor/utils'
 import { breadcrumb } from '@dd-monitor/core'
-import type { BaseClient } from '@dd-monitor/core'
+import type { BrowserClient } from '../browser'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { TransportData } from './../types/transport'
 import type { App, ComponentPublicInstance } from 'vue'
 
-const vuePlugin: BasePluginType<EventTypes, BaseClient> = {
+const vuePlugin: BasePluginType<EventTypes, BrowserClient> = {
   name: EventTypes.Vue,
   on(notify) {
     const Vue: any = this.options.vue
@@ -30,6 +30,10 @@ const vuePlugin: BasePluginType<EventTypes, BaseClient> = {
           time: getTimestamp(),
         }
         notify(EventTypes.Vue, { data, vm })
+        const hasConsole = typeof console !== 'undefined'
+        if (hasConsole) {
+          console.error(`Error in ${info}: "${err.toString()}"`)
+        }
         return originErrorHandle?.(err, vm, info)
       }
     }
@@ -47,12 +51,12 @@ const vuePlugin: BasePluginType<EventTypes, BaseClient> = {
     }
   },
   emit(data: TransportData) {
-    this.breadcrumb.push({
-      type: EventTypes.Vue,
-      category: breadcrumb.getCategory(EventTypes.Vue),
+    breadcrumb.push({
+      type: EventTypes.Error,
+      category: breadcrumb.getCategory(EventTypes.Error),
       data,
     })
-    this.transport.send(data)
+    this.transport.send(data, breadcrumb.getStack())
   },
 }
 

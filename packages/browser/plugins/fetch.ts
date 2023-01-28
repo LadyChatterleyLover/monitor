@@ -17,18 +17,21 @@ const fetchPlugin: BasePluginType<EventTypes, BrowserClient> = {
       collectedData.status === 0 ||
       collectedData.status === HttpCode.BadRequest ||
       collectedData.status > HttpCode.Unauthorized
-    const result = httpTransform(collectedData, this.options)
+    const result: any = httpTransform(collectedData, this.options)
+    result.isError = isError
+    return result
+  },
+  emit(transformedData) {
     breadcrumb.push({
       type: EventTypes.Fetch,
       category: breadcrumb.getCategory(EventTypes.Fetch),
-      data: Object.assign({}, result),
-      status: isError ? StatusCode.Error : StatusCode.Ok,
-      time: collectedData.time,
+      data: Object.assign({}, transformedData),
+      status: transformedData.isError ? StatusCode.Error : StatusCode.Ok,
+      time: transformedData.time,
     })
-    return httpTransform(collectedData, this.options)
-  },
-  emit(transformedData) {
-    return this.transport.send(transformedData, breadcrumb.getStack())
+    if (transformedData.isError) {
+      return this.transport.send(transformedData, breadcrumb.getStack())
+    }
   },
 }
 

@@ -14,13 +14,14 @@ export function httpTransform(data, options) {
   } else {
     message = fromHttpStatus(status)
   }
-  message = `${data.url}; ${message}`
+  message = `${data.url}: ${message}`
   return {
     url: data.url,
     time,
     elapsedTime,
     message,
     name,
+    type,
     request: {
       httpType: type,
       method,

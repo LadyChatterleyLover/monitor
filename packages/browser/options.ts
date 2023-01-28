@@ -34,7 +34,6 @@ export class BrowserOptions extends BaseOptions<BrowserOptionsFieldsTypes> {
       recordScreen = true,
       whiteScreen = true,
       console = true,
-      vue = true,
       error = true,
       disabled = false,
     } = options
@@ -49,7 +48,6 @@ export class BrowserOptions extends BaseOptions<BrowserOptionsFieldsTypes> {
       [recordScreen, 'recordScreen', booleanType],
       [whiteScreen, 'whiteScreen', booleanType],
       [console, 'console', booleanType],
-      [vue, 'vue', booleanType],
       [error, 'error', booleanType],
       [disabled, 'disabled', booleanType],
     ]
