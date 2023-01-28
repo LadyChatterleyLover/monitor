@@ -7,13 +7,14 @@ import {
 } from '@dd-monitor/utils'
 import dayjs from 'dayjs'
 import { roleName, username } from './../types/const'
+import { recordData } from './plugins/record'
 import type { TransportData } from '@dd-monitor/types'
 import type { BrowserOptionsFieldsTypes } from './types'
 
 export class BrowserTransport extends Transport<BrowserOptionsFieldsTypes> {
   configReportXhr: unknown
   useImgUpload = false
-  constructor(options: BrowserOptionsFieldsTypes) {
+  constructor(public options: BrowserOptionsFieldsTypes) {
     super()
     super.bindOptions(options)
     this.bindOptions(options)
@@ -51,19 +52,29 @@ export class BrowserTransport extends Transport<BrowserOptionsFieldsTypes> {
       deviceInfo: _support.deviceInfo,
       username,
       roleName,
+      recordScreenId: _support.recordScreenId,
     }
 
     // 性能数据和录屏不需要附带用户行为
     if (
       data.type != EventTypes.Performance &&
-      data.type != EventTypes.Recordscreen
+      data.type != EventTypes.RecordScreen
     ) {
       info.breadcrumb = new Breadcrumb().getStack() // 获取用户行为栈
     }
     return info
   }
   sendToServer(data: any, url: string): void {
-    data.recordScreenId = _support.recordScreenId
+    console.log('data', data.type)
+    // 开启录屏
+    if (this.options.recordScreen) {
+      if (this.options.recordScreenTypeList.includes(data.type)) {
+        console.log('111')
+        // 修改hasError
+        _support.hasError = true
+        data.recordScreenId = _support.recordScreenId
+      }
+    }
     return this.useImgUpload ? this.imgRequest(data, url) : this.post(data, url)
   }
 

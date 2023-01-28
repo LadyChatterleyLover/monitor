@@ -37,8 +37,8 @@ export enum EventTypes {
   React = 'react',
   Custom = 'custom',
   Performance = 'performance',
-  Recordscreen = 'recordscreen',
-  Whitescreen = 'whitescreen',
+  RecordScreen = 'recordScreen',
+  WhiteScreen = 'whiteScreen',
 }
 
 // 状态

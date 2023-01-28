@@ -8,6 +8,7 @@ import {
 import { breadcrumb } from '@dd-monitor/core'
 import { StatusCode } from '../../types/event'
 import { getTimestamp } from '../../utils/helper'
+import { recordData } from './record'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 

@@ -2,6 +2,7 @@ import { EventTypes, StatusCode } from '@dd-monitor/types'
 import { _global, getTimestamp, interceptStr, onEvent } from '@dd-monitor/utils'
 import ErrorStackParser from 'error-stack-parser'
 import { breadcrumb } from '@dd-monitor/core'
+import { recordData } from './record'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 
@@ -77,7 +78,8 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
     }
   },
   emit(transformedData) {
-    return this.transport.send(transformedData, breadcrumb.getStack())
+    this.transport.send(transformedData, breadcrumb.getStack())
+    recordData(this.transport, this.options)
   },
 }
 

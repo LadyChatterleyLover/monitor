@@ -26,6 +26,7 @@
     "error-stack-parser": "^2.1.4",
     "js-base64": "^3.7.4",
     "pako": "^2.1.0",
+    "rrweb": "2.0.0-alpha.4",
     "rrweb-player": "1.0.0-alpha.4",
     "ua-parser-js": "^1.0.33"
   },

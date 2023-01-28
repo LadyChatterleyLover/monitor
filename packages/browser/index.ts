@@ -1,3 +1,4 @@
+import { EventTypes } from '@dd-monitor/types'
 import { BrowserClient } from './client'
 import errorPlugin from './plugins/error'
 import unhandlerejecttionPlugin from './plugins/unhandlerejecttion'
@@ -12,6 +13,15 @@ function init(
   options: BrowserOptionsFieldsTypes,
   plugins: BasePluginType[] = []
 ) {
+  options.recordScreen = options.recordScreen ?? true
+  options.recordScreenTypeList = options.recordScreenTypeList ?? [
+    EventTypes.Error,
+    EventTypes.Unhandledrejection,
+    EventTypes.Resource,
+    EventTypes.Fetch,
+    EventTypes.Xhr,
+  ]
+  options.recordScreentime = options.recordScreentime ?? 5
   const browserClient = new BrowserClient(options)
   const browserPlugins = [
     domPlugin,

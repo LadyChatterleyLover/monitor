@@ -6,6 +6,7 @@ import {
   htmlElementAsString,
   onEvent,
 } from '@dd-monitor/utils'
+import { recordData } from './record'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 
