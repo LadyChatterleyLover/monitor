@@ -234,3 +234,7 @@ export function htmlElementAsString(target) {
     classNames !== '' ? classNames : ''
   }>${innerText}</${tagName}>`
 }
+
+export function isExistProperty(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key)
+}
