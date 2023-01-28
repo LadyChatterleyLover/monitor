@@ -20,6 +20,7 @@ function init(
     EventTypes.Resource,
     EventTypes.Fetch,
     EventTypes.Xhr,
+    EventTypes.Vue,
   ]
   options.recordScreentime = options.recordScreentime ?? 5
   const browserClient = new BrowserClient(options)

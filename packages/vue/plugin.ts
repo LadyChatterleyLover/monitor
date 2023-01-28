@@ -22,14 +22,16 @@ const vuePlugin: BasePluginType<EventTypes, BrowserClient> = {
         info: string
       ): void {
         const data = {
+          type: EventTypes.Vue,
           message: `${err.message}(${info})`,
           url: getUrlWithEnv(),
           name: err.name,
+          stack: err.stack || [],
           time: getTimestamp(),
         }
         notify(EventTypes.Vue, { data, vm })
         const hasConsole = typeof console !== 'undefined'
-        if (hasConsole) {
+        if (hasConsole && !Vue.config.silent) {
           console.error(`Error in ${info}: "${err.toString()}"`)
         }
         return originErrorHandle?.(err, vm, info)

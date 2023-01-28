@@ -65,11 +65,9 @@ export class BrowserTransport extends Transport<BrowserOptionsFieldsTypes> {
     return info
   }
   sendToServer(data: any, url: string): void {
-    console.log('data', data.type)
     // 开启录屏
     if (this.options.recordScreen) {
       if (this.options.recordScreenTypeList.includes(data.type)) {
-        console.log('111')
         // 修改hasError
         _support.hasError = true
         data.recordScreenId = _support.recordScreenId
