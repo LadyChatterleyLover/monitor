@@ -18,7 +18,7 @@ export class BrowserClient extends BaseClient<
   EventTypes
 > {
   transport: BrowserTransport
-  breadcrumb: Breadcrumb<BrowserOptionsFieldsTypes>
+  breadcrumb: Breadcrumb
   constructor(options: BrowserOptionsFieldsTypes) {
     super(options)
     this.options = new BrowserOptions(options)
