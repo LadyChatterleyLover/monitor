@@ -25,6 +25,7 @@ export interface MonitorSupport {
 }
 
 interface MONITORGlobal {
+  __VUE__?: boolean
   console?: Console
   __Monitor__?: MonitorSupport
 }
