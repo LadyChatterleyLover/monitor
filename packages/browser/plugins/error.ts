@@ -23,24 +23,22 @@ export function resourceTransform(target) {
 const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
   name: EventTypes.Error,
   on(emit) {
-    if (_global.__VUE__) {
-      const Vue = this.options.vue
-      const handler = Vue.config.errorHandler
-      Vue.config.errorHandler = function (err, vm, info) {
-        console.log(err)
-        emit(EventTypes.Error, err)
-        if (handler) Reflect.apply(handler, null, [err, vm, info])
-      }
-    } else {
-      onEvent(
-        _global,
-        'error',
-        (e) => {
-          emit(EventTypes.Error, e)
-        },
-        true
-      )
-    }
+    onEvent(
+      _global,
+      'error',
+      (e) => {
+        if (_global.__VUE__) {
+          const Vue = this.options.vue
+          const handler = Vue.config.errorHandler
+          Vue.config.errorHandler = function (err, vm, info) {
+            console.log(err)
+            if (handler) Reflect.apply(handler, null, [err, vm, info])
+          }
+        }
+        emit(EventTypes.Error, e)
+      },
+      true
+    )
   },
   transform(ev: any) {
     const target = ev.target
@@ -68,6 +66,7 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
         ...errorData,
       }
     }
+
     // 资源加载报错
     if (target.localName) {
       // 提取资源加载的信息

@@ -1,18 +1,14 @@
-import { BreadcrumbTypes, EventTypes } from '@dd-monitor/types'
-import { _support, getTimestamp, validateOption } from '@dd-monitor/utils'
-import type {
-  BaseOptionsFieldsIntegrationType,
-  BreadcrumbData,
-} from '@dd-monitor/types'
-
-class Breadcrumb<
-  O extends BaseOptionsFieldsIntegrationType = BaseOptionsFieldsIntegrationType
-> {
-  private maxBreadcrumbs = 20
-  private beforePushBreadcrumb: unknown = null
-  private stack: BreadcrumbData[] = []
-  constructor(options: Partial<O> = {}) {
-    this.bindOptions(options)
+import { EventTypes } from '@dd-monitor/types'
+import { _support, getTimestamp, validateOption } from '../utils'
+import { BreadcrumbTypes } from './../types/event'
+export class Breadcrumb {
+  public maxBreadcrumbs: number
+  public beforePushBreadcrumb: unknown
+  public stack: any[]
+  constructor() {
+    this.maxBreadcrumbs = 20
+    this.beforePushBreadcrumb = null
+    this.stack = []
   }
   /**
    * 添加用户行为栈
@@ -44,7 +40,7 @@ class Breadcrumb<
   getStack() {
     return this.stack
   }
-  getCategory(type: EventTypes) {
+  getCategory(type) {
     switch (type) {
       // 接口请求
       case EventTypes.Xhr:
@@ -74,7 +70,7 @@ class Breadcrumb<
         return BreadcrumbTypes.Custom
     }
   }
-  bindOptions(options: Partial<O> = {}) {
+  bindOptions(options: any = {}) {
     // maxBreadcrumbs 用户行为存放的最大容量
     // beforePushBreadcrumb 添加用户行为前的处理函数
     const { maxBreadcrumbs, beforePushBreadcrumb } = options
@@ -84,7 +80,6 @@ class Breadcrumb<
       (this.beforePushBreadcrumb = beforePushBreadcrumb)
   }
 }
-
 const breadcrumb =
   _support.breadcrumb || (_support.breadcrumb = new Breadcrumb())
-export { breadcrumb, Breadcrumb }
+export { breadcrumb }
