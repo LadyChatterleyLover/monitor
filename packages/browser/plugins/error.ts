@@ -1,7 +1,12 @@
 import { EventTypes, StatusCode } from '@dd-monitor/types'
-import { _global, getTimestamp, interceptStr, onEvent } from '@dd-monitor/utils'
+import {
+  _global,
+  _support,
+  getTimestamp,
+  interceptStr,
+  onEvent,
+} from '@dd-monitor/utils'
 import ErrorStackParser from 'error-stack-parser'
-import { breadcrumb } from '@dd-monitor/core'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 
@@ -55,9 +60,9 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
         line: lineNumber,
         column: columnNumber,
       }
-      breadcrumb.push({
+      _support.breadcrumb.push({
         type: EventTypes.Error,
-        category: breadcrumb.getCategory(EventTypes.Error),
+        category: _support.breadcrumb.getCategory(EventTypes.Error),
         data: errorData,
         time: getTimestamp(),
         status: StatusCode.Error,
@@ -71,11 +76,10 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
     if (target.localName) {
       // 提取资源加载的信息
       const data = resourceTransform(target)
-      console.log('breadcrumb1', breadcrumb)
-      breadcrumb.push({
+      _support.breadcrumb.push({
         ...data,
         type: EventTypes.Resource,
-        category: breadcrumb.getCategory(EventTypes.Resource),
+        category: _support.breadcrumb.getCategory(EventTypes.Resource),
         status: StatusCode.Error,
         time: getTimestamp(),
       })
@@ -87,8 +91,7 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
     }
   },
   emit(transformedData) {
-    console.log('breadcrumb2', breadcrumb)
-    return this.transport.send(transformedData, breadcrumb.getStack())
+    return this.transport.send(transformedData, _support.breadcrumb.getStack())
   },
 }
 

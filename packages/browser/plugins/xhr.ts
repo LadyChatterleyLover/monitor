@@ -1,7 +1,7 @@
-import { breadcrumb } from '@dd-monitor/core'
 import { EventTypes, HttpCode, StatusCode } from '@dd-monitor/types'
 import {
   _global,
+  _support,
   getTimestamp,
   onEvent,
   replaceOld,
@@ -28,15 +28,18 @@ const xhrPlugin: BasePluginType<EventTypes, BrowserClient> = {
     return result
   },
   emit(transformedData) {
-    breadcrumb.push({
+    _support.breadcrumb.push({
       type: EventTypes.Xhr,
-      category: breadcrumb.getCategory(EventTypes.Xhr),
+      category: _support.breadcrumb.getCategory(EventTypes.Xhr),
       data: Object.assign({}, transformedData),
       status: transformedData.isError ? StatusCode.Error : StatusCode.Ok,
       time: transformedData.time,
     })
     if (transformedData.isError) {
-      return this.transport.send(transformedData, breadcrumb.getStack())
+      return this.transport.send(
+        transformedData,
+        _support.breadcrumb.getStack()
+      )
     }
   },
 }

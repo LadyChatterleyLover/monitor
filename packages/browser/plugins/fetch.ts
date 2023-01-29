@@ -1,6 +1,5 @@
-import { breadcrumb } from '@dd-monitor/core'
 import { EventTypes, HttpType, StatusCode } from '@dd-monitor/types'
-import { _global, getTimestamp, replaceOld } from '@dd-monitor/utils'
+import { _global, _support, getTimestamp, replaceOld } from '@dd-monitor/utils'
 import { httpTransform } from '../utils'
 import { HttpCode } from './../../types/event'
 import type { HttpMethod } from './../../types/options'
@@ -22,15 +21,18 @@ const fetchPlugin: BasePluginType<EventTypes, BrowserClient> = {
     return result
   },
   emit(transformedData) {
-    breadcrumb.push({
+    _support.breadcrumb.push({
       type: EventTypes.Fetch,
-      category: breadcrumb.getCategory(EventTypes.Fetch),
+      category: _support.breadcrumb.getCategory(EventTypes.Fetch),
       data: Object.assign({}, transformedData),
       status: transformedData.isError ? StatusCode.Error : StatusCode.Ok,
       time: transformedData.time,
     })
     if (transformedData.isError) {
-      return this.transport.send(transformedData, breadcrumb.getStack())
+      return this.transport.send(
+        transformedData,
+        _support.breadcrumb.getStack()
+      )
     }
   },
 }

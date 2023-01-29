@@ -1,7 +1,7 @@
-import { breadcrumb } from '@dd-monitor/core'
 import { EventTypes, StatusCode } from '@dd-monitor/types'
 import {
   _global,
+  _support,
   getTimestamp,
   htmlElementAsString,
   onEvent,
@@ -32,9 +32,9 @@ const domPlugin: BasePluginType<EventTypes, BrowserClient> = {
     return htmlString
   },
   emit(transformedData) {
-    breadcrumb.push({
+    _support.breadcrumb.push({
       type: EventTypes.Click,
-      category: breadcrumb.getCategory(EventTypes.Click),
+      category: _support.breadcrumb.getCategory(EventTypes.Click),
       data: transformedData,
       time: getTimestamp(),
       status: StatusCode.Ok,

@@ -7,7 +7,6 @@ import {
 } from '@dd-monitor/utils'
 import dayjs from 'dayjs'
 import { roleName, username } from './../types/const'
-import { recordData } from './plugins/record'
 import type { TransportData } from '@dd-monitor/types'
 import type { BrowserOptionsFieldsTypes } from './types'
 

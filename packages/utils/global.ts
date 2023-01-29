@@ -1,11 +1,10 @@
 import { UAParser } from 'ua-parser-js'
+import { Breadcrumb } from '@dd-monitor/core'
 import { generateUUID } from './helper'
-import type { Logger } from './logger'
-import type { Breadcrumb, Transport } from '@dd-monitor/core'
+import type { Transport } from '@dd-monitor/core'
 import type { EventTypes } from '@dd-monitor/types'
 
 export interface MonitorSupport {
-  logger: Logger
   replaceFlag: { [key in EventTypes]?: boolean }
   record?: any[]
   deviceInfo?: {
@@ -20,7 +19,7 @@ export interface MonitorSupport {
   hasError: boolean
   events: any[]
   recordScreenId: string
-  breadcrumb: Breadcrumb
+  breadcrumb: any
   transport: Transport
 }
 
@@ -66,14 +65,6 @@ _support.deviceInfo = {
 }
 
 _support.replaceFlag = _support.replaceFlag || {}
-const replaceFlag = _support.replaceFlag
-export function setFlag(replaceType, isSet) {
-  if (replaceFlag[replaceType]) return
-  replaceFlag[replaceType] = isSet
-}
-export function getFlag(replaceType) {
-  return replaceFlag[replaceType] ? true : false
-}
 
 function getGlobalMonitorSupport(): MonitorSupport {
   _global.__Monitor__ = _global.__Monitor__ || ({} as MonitorSupport)

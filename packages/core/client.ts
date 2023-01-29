@@ -1,5 +1,4 @@
 import { SDK_VERSION } from '@dd-monitor/types'
-import { logger } from '@dd-monitor/utils'
 import { SDK_NAME } from './../types/const'
 import { Subscribe } from './subscribe'
 import type { Breadcrumb } from './breadcrumb'
@@ -24,7 +23,6 @@ export abstract class BaseClient<
   abstract transport: Transport
   constructor(options: O) {
     this.options = options
-    logger.bindOptions(options.debug)
   }
   use(plugins: BasePluginType<E>[]) {
     if (this.options.disabled) return

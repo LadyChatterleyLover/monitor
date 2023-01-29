@@ -1,14 +1,13 @@
-import { EventTypes, RouteChangeCollectType } from '@dd-monitor/types'
+import { EventTypes } from '@dd-monitor/types'
 import {
   _global,
+  _support,
   getLocationHref,
   replaceOld,
   supportsHistory,
 } from '@dd-monitor/utils'
-import { breadcrumb } from '@dd-monitor/core'
 import { StatusCode } from '../../types/event'
 import { getTimestamp } from '../../utils/helper'
-import { recordData } from './record'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 
@@ -51,8 +50,8 @@ const historyRoutePlugin: BasePluginType<EventTypes, BrowserClient> = {
     return collectedData
   },
   emit(transformedData) {
-    breadcrumb.push({
-      category: breadcrumb.getCategory(EventTypes.History),
+    _support.breadcrumb.push({
+      category: _support.breadcrumb.getCategory(EventTypes.History),
       type: EventTypes.History,
       status: StatusCode.Ok,
       time: getTimestamp(),

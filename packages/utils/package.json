@@ -7,7 +7,7 @@
   "author": "",
   "main": "index.ts",
   "module": "index.ts",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsup"
   }

@@ -35,7 +35,7 @@
     "allowJs": false, // 不允许编译javascript文件。
     "lib": [
       // 编译过程中需要引入的库文件的列表
-      "es6",
+      "es2016",
       "dom"
     ]
   },

@@ -1,6 +1,6 @@
-import { EventTypes } from '@dd-monitor/types'
-import { _support, getTimestamp, validateOption } from '../utils'
-import { BreadcrumbTypes } from './../types/event'
+import { BreadcrumbTypes, EventTypes } from '@dd-monitor/types'
+import { _support, getTimestamp, validateOption } from '@dd-monitor/utils'
+
 export class Breadcrumb {
   public maxBreadcrumbs: number
   public beforePushBreadcrumb: unknown
@@ -80,6 +80,5 @@ export class Breadcrumb {
       (this.beforePushBreadcrumb = beforePushBreadcrumb)
   }
 }
-const breadcrumb =
-  _support.breadcrumb || (_support.breadcrumb = new Breadcrumb())
-export { breadcrumb }
+
+_support.breadcrumb = new Breadcrumb()
