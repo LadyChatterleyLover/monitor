@@ -1,5 +1,4 @@
 import { fromHttpStatus } from '@dd-monitor/utils'
-import type { BrowserOptions } from './options'
 
 // 处理接口的状态
 export function httpTransform(data, options) {
