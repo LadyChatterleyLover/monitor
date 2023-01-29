@@ -22,7 +22,7 @@ const vuePlugin: BasePluginType<EventTypes, BrowserClient> = {
         info: string
       ): void {
         const data = {
-          type: EventTypes.Vue,
+          type: EventTypes.Error,
           message: `${err.message}(${info})`,
           url: getUrlWithEnv(),
           name: err.name,

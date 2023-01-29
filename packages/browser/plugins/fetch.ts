@@ -3,7 +3,6 @@ import { EventTypes, HttpType, StatusCode } from '@dd-monitor/types'
 import { _global, getTimestamp, replaceOld } from '@dd-monitor/utils'
 import { httpTransform } from '../utils'
 import { HttpCode } from './../../types/event'
-import { recordData } from './record'
 import type { HttpMethod } from './../../types/options'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
@@ -31,8 +30,7 @@ const fetchPlugin: BasePluginType<EventTypes, BrowserClient> = {
       time: transformedData.time,
     })
     if (transformedData.isError) {
-      this.transport.send(transformedData, breadcrumb.getStack())
-      recordData(this.transport, this.options)
+      return this.transport.send(transformedData, breadcrumb.getStack())
     }
   },
 }

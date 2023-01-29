@@ -1,5 +1,5 @@
 import { breadcrumb } from '@dd-monitor/core'
-import { EventTypes, HttpCode, HttpType, StatusCode } from '@dd-monitor/types'
+import { EventTypes, HttpCode, StatusCode } from '@dd-monitor/types'
 import {
   _global,
   getTimestamp,
@@ -8,7 +8,6 @@ import {
   variableTypeDetection,
 } from '@dd-monitor/utils'
 import { httpTransform } from '../utils'
-import { recordData } from './record'
 import type { MONITORXMLHttpRequest } from '../../types/http'
 import type { HttpMethod } from './../../types/options'
 import type { BasePluginType } from '@dd-monitor/types'
@@ -37,8 +36,7 @@ const xhrPlugin: BasePluginType<EventTypes, BrowserClient> = {
       time: transformedData.time,
     })
     if (transformedData.isError) {
-      this.transport.send(transformedData, breadcrumb.getStack())
-      recordData(this.transport, this.options)
+      return this.transport.send(transformedData, breadcrumb.getStack())
     }
   },
 }

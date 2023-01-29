@@ -20,9 +20,18 @@ function init(
     EventTypes.Resource,
     EventTypes.Fetch,
     EventTypes.Xhr,
-    EventTypes.Vue,
   ]
   options.recordScreentime = options.recordScreentime ?? 5
+  options.debug = options.debug ?? true
+  options.disabled = options.disabled ?? false
+  options.dom = options.dom ?? true
+  options.xhr = options.xhr ?? true
+  options.unhandledrejection = options.unhandledrejection ?? true
+  options.error = options.error ?? true
+  options.fetch = options.fetch ?? true
+  options.history = options.history ?? true
+  options.maxBreadcrumbs = options.maxBreadcrumbs ?? 10
+  options.maxDuplicateCount = options.maxDuplicateCount ?? 2
   const browserClient = new BrowserClient(options)
   const browserPlugins = [
     domPlugin,

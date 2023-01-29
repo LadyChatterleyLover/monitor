@@ -28,6 +28,7 @@ export function recordData(
   transport: BrowserTransport,
   options: BrowserOptionsFieldsTypes
 ) {
+  console.log('recordData')
   let events = []
   record({
     emit(event, isCheckout) {

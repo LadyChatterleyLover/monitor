@@ -45,8 +45,7 @@ const unhandlerejectionPlugin: BasePluginType<EventTypes, BrowserClient> = {
     return data
   },
   emit(transformedData) {
-    this.transport.send(transformedData, breadcrumb.getStack())
-    recordData(this.transport, this.options)
+    return this.transport.send(transformedData, breadcrumb.getStack())
   },
 }
 
