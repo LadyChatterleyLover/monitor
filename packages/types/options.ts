@@ -40,6 +40,8 @@ export interface BaseOptionsFieldsType {
   throttleDelayTime?: number
   // 最大上报数 默认为2
   maxDuplicateCount?: number
+  // 录屏时间
+  recordScreentime?: number
   // vue实例
   vue?: App
 }

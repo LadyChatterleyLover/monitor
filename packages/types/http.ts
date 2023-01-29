@@ -1,8 +1,8 @@
 import type { EventTypes, HttpMethod, HttpType } from '@dd-monitor/types'
 
 export interface HttpCollectedType {
-  type: EventTypes
-  method: HttpMethod
+  type?: EventTypes
+  method?: HttpMethod
   request: {
     httpType?: HttpType
     traceId?: string
@@ -16,4 +16,9 @@ export interface HttpCollectedType {
   }
   elapsedTime?: number
   time?: number
+}
+
+export interface MONITORXMLHttpRequest extends XMLHttpRequest {
+  [key: string]: any
+  httpCollect?: HttpCollectedType
 }

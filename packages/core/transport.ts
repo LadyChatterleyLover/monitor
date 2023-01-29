@@ -1,5 +1,6 @@
 import {
   Queue,
+  _support,
   generateUUID,
   isInclude,
   validateOptionsAndSet,
@@ -28,6 +29,7 @@ export abstract class Transport<
   backTrackerId: unknown = null
   configReportUrl: unknown = null
   maxDuplicateCount = 3
+  recordScreentime = 10
   uuid = generateUUID()
   constructor() {
     this.queue = new Queue()

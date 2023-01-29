@@ -7,6 +7,7 @@ import {
 } from '@dd-monitor/utils'
 import ErrorStackParser from 'error-stack-parser'
 import { breadcrumb } from '@dd-monitor/core'
+import { recordData } from './record'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 

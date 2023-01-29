@@ -22,6 +22,8 @@ export interface BrowserOptions {
   recordScreen?: boolean
   whiteScreen?: boolean
   error?: boolean
+  recordScreenTypeList?: string[]
+  recordScreentime?: number
 }
 
 export interface BrowserOptionsHooksType {
