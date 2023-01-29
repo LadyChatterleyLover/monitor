@@ -71,6 +71,7 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
     if (target.localName) {
       // 提取资源加载的信息
       const data = resourceTransform(target)
+      console.log('breadcrumb1', breadcrumb)
       breadcrumb.push({
         ...data,
         type: EventTypes.Resource,
@@ -86,6 +87,7 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
     }
   },
   emit(transformedData) {
+    console.log('breadcrumb2', breadcrumb)
     return this.transport.send(transformedData, breadcrumb.getStack())
   },
 }
