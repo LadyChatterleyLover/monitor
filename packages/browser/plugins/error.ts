@@ -6,18 +6,13 @@ import {
   interceptStr,
   onEvent,
 } from '@dd-monitor/utils'
+import ErrorStackParser from 'error-stack-parser'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserClient } from '../client'
 
 const resourceMap = {
   img: '图片',
   script: 'js脚本',
-}
-
-export interface ResourceErrorTarget {
-  src?: string
-  href?: string
-  localName?: string
 }
 
 export function resourceTransform(target) {
@@ -51,18 +46,20 @@ const errorPlugin: BasePluginType<EventTypes, BrowserClient> = {
       true
     )
   },
-  transform(ev: ErrorEvent) {
-    const target = ev.target as ResourceErrorTarget
-    if (!target) {
+  transform(ev: any) {
+    const target = ev.target
+    if (!target || (ev.target && !ev.target.localName)) {
       // vue和react捕获的报错使用ev解析，异步错误使用ev.Error解析
+      const stackFrame = ErrorStackParser.parse(!target ? ev : ev.error)[0]
+      const { fileName, columnNumber, lineNumber } = stackFrame
       const errorData = {
         type: EventTypes.Error,
         status: StatusCode.Error,
         time: getTimestamp(),
         message: ev.message,
-        fileName: ev.filename,
-        line: ev.lineno,
-        column: ev.colno,
+        fileName,
+        line: lineNumber,
+        column: columnNumber,
       }
       _support.breadcrumb.push({
         type: EventTypes.Error,
