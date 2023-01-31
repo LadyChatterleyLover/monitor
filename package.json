@@ -18,10 +18,8 @@
   "dependencies": {
     "@dd-monitor/browser": "workspace:*",
     "@dd-monitor/core": "workspace:*",
-    "@dd-monitor/react": "workspace:*",
     "@dd-monitor/types": "workspace:*",
     "@dd-monitor/utils": "workspace:*",
-    "@dd-monitor/vue": "workspace:*",
     "dayjs": "^1.11.7",
     "error-stack-parser": "^2.1.4",
     "js-base64": "^3.7.4",
