@@ -18,6 +18,7 @@ const fetchPlugin: BasePluginType<EventTypes, BrowserClient> = {
       collectedData.status > HttpCode.Unauthorized
     const result: any = httpTransform(collectedData, this.options)
     result.isError = isError
+    result.status = isError ? StatusCode.Error : StatusCode.Ok
     return result
   },
   emit(transformedData) {
@@ -33,6 +34,8 @@ const fetchPlugin: BasePluginType<EventTypes, BrowserClient> = {
         transformedData,
         _support.breadcrumb.getStack()
       )
+    } else {
+      return this.transport.send(transformedData)
     }
   },
 }
@@ -55,6 +58,13 @@ function monitorFetch(
         method,
         reqData: config && config.body,
         url,
+        request: {
+          httpType: HttpType.Fetch,
+          url,
+          method,
+          data: config && config.body,
+        },
+        response: {},
       }
       const headers = new Headers(config.headers || {})
       Object.assign(headers, {

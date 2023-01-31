@@ -1,4 +1,4 @@
-import { EventTypes, HttpCode, StatusCode } from '@dd-monitor/types'
+import { EventTypes, HttpCode, HttpType, StatusCode } from '@dd-monitor/types'
 import {
   _global,
   _support,
@@ -25,6 +25,7 @@ const xhrPlugin: BasePluginType<EventTypes, BrowserClient> = {
       collectedData.status > HttpCode.Unauthorized
     const result: any = httpTransform(collectedData, this.options)
     result.isError = isError
+    result.status = isError ? StatusCode.Error : StatusCode.Ok
     return result
   },
   emit(transformedData) {
@@ -40,6 +41,8 @@ const xhrPlugin: BasePluginType<EventTypes, BrowserClient> = {
         transformedData,
         _support.breadcrumb.getStack()
       )
+    } else {
+      return this.transport.send(transformedData)
     }
   },
 }
@@ -63,6 +66,14 @@ function monitorXhr(
         time: getTimestamp(),
         url: args[1],
         method,
+        request: {
+          httpType: HttpType.Xhr,
+          method: variableTypeDetection.isString(args[0])
+            ? args[0].toUpperCase()
+            : args[0],
+          url: args[1],
+        },
+        response: {},
       }
       originalOpen.apply(this, args)
     }
