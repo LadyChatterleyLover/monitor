@@ -21,6 +21,7 @@ export interface BrowserOptions {
   unhandledrejection?: boolean
   recordScreen?: boolean
   whiteScreen?: boolean
+  performance?: boolean
   error?: boolean
   recordScreenTypeList?: string[]
   recordScreentime?: number

@@ -46,6 +46,7 @@ export class BrowserOptions extends BaseOptions<BrowserOptionsFieldsTypes> {
       console = true,
       error = true,
       disabled = false,
+      performance = true,
     } = options
     const booleanType = ToStringTypes.Boolean
     const optionArr = [
@@ -57,6 +58,7 @@ export class BrowserOptions extends BaseOptions<BrowserOptionsFieldsTypes> {
       [unhandledrejection, 'unhandledrejection', booleanType],
       [recordScreen, 'recordScreen', booleanType],
       [whiteScreen, 'whiteScreen', booleanType],
+      [performance, 'performance', booleanType],
       [console, 'console', booleanType],
       [error, 'error', booleanType],
       [disabled, 'disabled', booleanType],

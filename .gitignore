@@ -18,6 +18,8 @@ lib
 /cypress/videos/
 /cypress/screenshots/
 /examples/*
+/vue-project/*
+/demo/*
 
 # Editor directories and files
 .vscode/*

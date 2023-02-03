@@ -26,7 +26,8 @@
     "pako": "^2.1.0",
     "rrweb": "2.0.0-alpha.4",
     "rrweb-player": "1.0.0-alpha.4",
-    "ua-parser-js": "^1.0.33"
+    "ua-parser-js": "^1.0.33",
+    "web-vitals": "^3.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",

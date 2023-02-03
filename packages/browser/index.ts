@@ -6,6 +6,9 @@ import domPlugin from './plugins/dom'
 import fetchPlugin from './plugins/fetch'
 import xhrPlugin from './plugins/xhr'
 import historyRoutePlugin from './plugins/historyRoute'
+import performancePlugin from './plugins/performance'
+import loadEventPlugin from './plugins/loadEvent'
+import longTaskPlugin from './plugins/longTask'
 import type { BasePluginType } from '@dd-monitor/types'
 import type { BrowserOptionsFieldsTypes } from './types'
 
@@ -26,6 +29,7 @@ function init(
   options.disabled = options.disabled ?? false
   options.dom = options.dom ?? true
   options.xhr = options.xhr ?? true
+  options.performance = options.performance ?? true
   options.unhandledrejection = options.unhandledrejection ?? true
   options.error = options.error ?? true
   options.fetch = options.fetch ?? true
@@ -40,6 +44,9 @@ function init(
     xhrPlugin,
     fetchPlugin,
     historyRoutePlugin,
+    performancePlugin,
+    loadEventPlugin,
+    longTaskPlugin,
   ]
   browserClient.use([...browserPlugins, ...plugins])
   return browserClient

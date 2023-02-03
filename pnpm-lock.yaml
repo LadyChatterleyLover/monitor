@@ -27,6 +27,7 @@ importers:
       typescript: ^4.9.4
       ua-parser-js: ^1.0.33
       vue: ^3.2.45
+      web-vitals: ^3.1.1
     dependencies:
       '@dd-monitor/browser': link:packages/browser
       '@dd-monitor/core': link:packages/core
@@ -39,6 +40,7 @@ importers:
       rrweb: 2.0.0-alpha.4
       rrweb-player: 1.0.0-alpha.4
       ua-parser-js: 1.0.33
+      web-vitals: 3.1.1
     devDependencies:
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
@@ -5802,6 +5804,13 @@ packages:
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
     dev: true
+
+  /web-vitals/3.1.1:
+    resolution:
+      {
+        integrity: sha512-qvllU+ZeQChqzBhZ1oyXmWsjJ8a2jHYpH8AMaVuf29yscOPZfTQTjQFRX6+eADTdsDE8IanOZ0cetweHMs8/2A==,
+      }
+    dev: false
 
   /webidl-conversions/4.0.2:
     resolution:

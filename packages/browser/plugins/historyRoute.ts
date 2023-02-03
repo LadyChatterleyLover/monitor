@@ -50,7 +50,7 @@ const historyRoutePlugin: BasePluginType<EventTypes, BrowserClient> = {
     return collectedData
   },
   emit(transformedData) {
-    _support.breadcrumb.push({
+    const breadcrumb = {
       category: _support.breadcrumb.getCategory(EventTypes.History),
       type: EventTypes.History,
       status: StatusCode.Ok,
@@ -59,7 +59,9 @@ const historyRoutePlugin: BasePluginType<EventTypes, BrowserClient> = {
         from: transformedData.from,
         to: transformedData.to,
       },
-    })
+    }
+    _support.breadcrumb.push(breadcrumb)
+    this.transport.send(breadcrumb)
   },
 }
 
